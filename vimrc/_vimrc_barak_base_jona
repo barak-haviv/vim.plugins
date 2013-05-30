@@ -1,0 +1,268 @@
+"runtime F:\software\portable\gVimPortable\App\vim\vim73\vimfiles\autoload\pathogen.vim
+ call pathogen#infect()
+ 
+    syntax on
+    filetype plugin indent on
+set nocompatible
+
+filetype off
+
+call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
+call pathogen#helptags()
+
+syntax on
+filetype plugin indent on
+
+let g:zenburn_high_Contrast=0
+colorscheme mayansmoke 
+
+set t_Co=256
+set encoding=utf-8
+"set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
+set laststatus=2
+set ls=2
+set tabstop=2
+set shiftwidth=2
+set scrolloff=5
+set showcmd
+set hlsearch
+set incsearch
+set ruler
+set visualbell t_vb=
+set novisualbell
+set nobackup
+set number
+set ignorecase
+set smartcase
+set title
+set ttyfast
+set modeline
+set modelines=3
+set shortmess=atI
+set nostartofline
+set whichwrap=b,s,h,l,<,>,[,]
+set autoindent
+set smartindent
+set cindent
+set expandtab
+set softtabstop=2
+set showmatch
+set cul
+set mouse=a
+set nowrap
+set formatoptions=l
+
+set pastetoggle=<F3>
+set hidden
+set colorcolumn=81
+set cursorcolumn
+set list
+
+set wildmenu
+set wildmode=list,full
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.d
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store
+set wildignore+=*.luac                           " Lua byte code
+
+set foldmethod=marker
+set completeopt=menuone,longest,preview
+let c_minlines=500
+
+
+" This autocommand jumps to the last known position in a file
+" just after opening it, if the '" mark is set: >
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+augroup myfiletypes
+  autocmd!
+
+  autocmd FileType helpfile set nonumber      " no line numbers when viewing help
+  autocmd FileType helpfile nnoremap <buffer><cr> <c-]>   " Enter selects subject
+  autocmd FileType helpfile nnoremap <buffer><bs> <c-T>   " Backspace to go back
+
+  autocmd FileType mail,tex set textwidth=72
+  autocmd FileType mail set spell
+
+  autocmd FileType cpp,c,java,sh,pl,php,asp,python,ruby set ai si ci
+  autocmd FileType cpp set et sw=4 sts=4
+  autocmd FileType javascript set et sw=2 sts=2
+  autocmd FileType python set noet ts=4 sw=4
+
+  autocmd FileType ruby set et sw=2 sts=2
+  autocmd FileType ruby set omnifunc=rubycomplete#Complete
+  autocmd FileType ruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby let g:rubycomplete_classes_in_global = 1
+
+  autocmd BufWritePost *.sh !chmod +x %
+  autocmd BufNewFile,BufRead  modprobe.conf set syntax=modconf
+  autocmd BufRead,BufNewFile *.js set ft=javascript
+  autocmd BufRead,BufNewFile *.json set ft=javascript
+  autocmd BufRead,BufNewFile *vimperator-raiki.rankabove.com* set ft=wp
+
+  " eh rainbox parens seems to break syntax highlighting
+  "au VimEnter * RainbowParenthesesToggle
+  "au Syntax * RainbowParenthesesLoadRound
+  "au Syntax * RainbowParenthesesLoadSquare
+  "au Syntax * RainbowParenthesesLoadBraces
+  "au Syntax * RainbowParenthesesLoadChevrons
+
+  " open tagbar at vim load
+  "au VimEnter * nested TagbarOpen
+augroup END
+
+let mapleader=","
+
+nnoremap j gj
+nnoremap k gk
+
+map <F1> :previous<CR>  
+map <F2> :next<CR> 
+map <silent> <C-N> :silent noh<CR>
+map ,v :sp $MYVIMRC<cr> 
+map ,e :e $MYVIMRC<cr>
+map ,u :source $MYVIMRC<cr>
+map ,h :source $VIM/vim73/syntax/2html.vim<cr>:w<cr>:clo<cr>
+" map t :tabnew 
+map <c-h> <c-w>h
+map <c-l> <c-w>l
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+
+nmap + maO<esc>`a
+nmap - mao<esc>`a
+nmap <F3> :set invpaste paste?<CR>
+nmap <leader>a <esc>:Ack! 
+
+vmap < <gv
+vmap > >gv
+vmap ij <Esc>
+
+imap <F3> <C-O><F3>
+imap jj <Esc>
+imap hh  => 
+
+" ctags
+" open definition in vsp
+map <A-]> :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
+
+" vim-pad
+"nmap <leader>pl <Plug>ListPads
+"nmap <leader>po <Plug>OpenPad
+"nmap <leader>ps <Plug>SearchPads
+"let g:pad_dir = '/home/jonuts/.vim-pad/'
+"let g:pad_use_default_mappings=0
+"let g:pad_window_height=12
+
+" gundo
+nnoremap <silent> <F5> :GundoToggle<CR>
+let g:gundo_right = 1
+
+" tagbar
+nnoremap <silent> <F9> :TagbarToggle<CR>
+let g:tagbar_width = 30
+
+" NERDTree
+nnoremap <leader>n :NERDTreeToggle<cr>
+let NERDTreeWinSize = 21
+let NERDTreeShowHidden = 1
+
+" SuperTab
+"let g:SuperTabCrMapping = 0
+"let g:SuperTabDefaultCompletionType = "context"
+
+" fugitive
+map <leader>gs :Gstatus<cr>
+map <leader>gc :Gcommit<cr>
+map <leader>gd :Gdiff<cr>
+
+" TaskList
+"map <unique> <Leader>T <Plug>TaskList
+
+" BufExplorer
+nnoremap <silent> <leader>B :BufExplorer<cr>
+nnoremap <silent> <leader>b :BufExplorer<cr>
+" let g:bufExplorerShowRelativePath = 1
+
+" tabman
+let g:tabman_width = 18
+
+" statline
+let g:statline_fugitive = 1
+let g:statline_rvm = 1
+
+" Command-T
+"nnoremap <silent> <c-t> :CommandT<cr>
+"nnoremap <silent> <c-b> :CommandTBuffer<cr>
+
+" CtrlP
+nnoremap <silent> <space> :CtrlPMRU<cr>
+nnoremap <silent> <c-t> :CtrlP<cr>
+nnoremap <silent> <c-b> :CtrlPMRU<cr>
+
+" ghimp.vim
+let g:ghimp#cache_dir = "/home/barak/.ghimpcache"
+
+let g:Powerline_symbols = 'fancy'
+
+"Barak Addition
+
+map <F7> :tabp<CR>
+map <F8> :tabn<CR>
+map + <C-W>>
+map - <C-W><
+
+command! Binfo execute "tabe ~/binfo.txt"
+command! Evimrc execute "tabe $MYVIMRC"
+command! Sovimrc execute "so $MYVIMRC"
+command! Mkcurrent execute "mksession ~/vimfiles/sessions/current.vim"
+command! Socurrent execute "so ~/vimfiles/sessions/current.vim"
+set hi=1000
+inoremap jk <esc>
+map <c-s> :w<cr>
+map <M-m> :set modifiable!<cr>
+
+so ~\vimfiles\barak\abcopy.vim
+
+command! Therainmaker execute "e d:\\barak\\Media\\library\\novels\\therainmaker\\therainmaker.txt | set nomodifiable"
+"set the current directory
+"http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+set autochdir
+
+set switchbuf=usetab
+nnoremap <F8> :sbnext<CR>
+nnoremap <S-F8> :sbprevious<CR>
+
+""autocmd BufEnter * silent! lcd %:p:h "if there is problems with sume plugin change to this
+
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+"hebrew 
+imap <f2> <c-o>:call ToggleHebrew()<cr>
+map <f4> :call ToggleHebrew()<cr>
+ 
+func! ToggleHebrew()
+  if &rl
+    set norl
+    set keymap=
+  else
+    set rl
+    set keymap=hebrew
+  end
+endfunc
+
