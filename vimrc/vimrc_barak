@@ -84,8 +84,8 @@ set omnifunc=syntaxcomplete#Complete
 " Let the filetype plugins do the work.
 set shiftwidth=2
 set tabstop=2
-"filetype indent on
-"set autoindent
+filetype indent on
+set autoindent
 set cindent
 
 " show matching enclosing chars for .1 sec
@@ -154,6 +154,34 @@ set switchbuf=useopen
 nnoremap <C-kPlus> :silent! let &guifont = substitute( &guifont, ':h\zs\d\+', '\=eval(submatch(0)+1)', '')<CR>
 nnoremap <C-kMinus> :silent! let &guifont = substitute( &guifont, ':h\zs\d\+', '\=eval(submatch(0)-1)', '')<CR>
 " }}}
+" {{{ filetypes 
+augroup myfiletypes
+  autocmd!
+
+  autocmd FileType helpfile set nonumber      " no line numbers when viewing help
+  autocmd FileType helpfile nnoremap <buffer><cr> <c-]>   " Enter selects subject
+  autocmd FileType helpfile nnoremap <buffer><bs> <c-T>   " Backspace to go back
+
+  autocmd FileType mail,tex set textwidth=72
+  autocmd FileType mail set spell
+
+  autocmd FileType cpp,c,java,sh,pl,php,asp,python,ruby set ai si ci
+  autocmd FileType cpp set et sw=4 sts=4
+  autocmd FileType javascript set et sw=2 sts=2
+  autocmd FileType python set noet ts=4 sw=4
+
+  autocmd FileType ruby set et sw=2 sts=2
+  autocmd FileType ruby set omnifunc=rubycomplete#Complete
+  autocmd FileType ruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby let g:rubycomplete_classes_in_global = 1
+
+  autocmd BufWritePost *.sh !chmod +x %
+  autocmd BufNewFile,BufRead  modprobe.conf set syntax=modconf
+  autocmd BufRead,BufNewFile *.js set ft=javascript
+  autocmd BufRead,BufNewFile *.json set ft=javascript
+  autocmd BufRead,BufNewFile *.html.erb set ft=html
+  autocmd BufRead,BufNewFile *vimperator-raiki.rankabove.com* set ft=wp
+" }}}
 " {{{ colors
 
 
@@ -217,7 +245,7 @@ let mapleader = ";"
 map <c-a> ggVG
 
 " vimrc
-let vimrc_file='~/vimfiles/vimrc/_vimrc_barak'
+let vimrc_file='~/.vim/vimrc/vimrc_barak'
 map <leader>v :exe "e ".vimrc_file<cr>
 map <leader>s :exe "so ".vimrc_file<cr>
 
@@ -246,8 +274,12 @@ nnoremap <silent> <c-space> :CtrlPMRU<cr>
 " Sessions
 let g:session_autosave = 'no'
 
+" vim-sinpmate
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails,ruby-1.9'
 " }}}
 
 
-
-so ~/vimfiles/vimrc/search_replace.vim
+let vim_dir_name=".vim"
+:exe "so ~/".vim_dir_name."/vimrc/search_replace.vim"
