@@ -245,12 +245,18 @@ let mapleader = ";"
 map <c-a> ggVG
 
 " vimrc
-let vimrc_file='~/.vim/vimrc/vimrc_barak'
-map <leader>v :exe "e ".vimrc_file<cr>
-map <leader>s :exe "so ".vimrc_file<cr>
+let $VIMRC_FILE='~/vimfiles/vimrc/vimrc_barak'
+map <leader>v :e $VIMRC_FILE<CR>
+map <leader>s :so $VIMRC_FILE<CR>
 
-" copy to clipboard
-map <leader>y "+y
+
+" clipboard
+" copy 
+map <leader>y "+y    
+" paste
+map <leader>p "+p
+
+
 
 " }}}
 " {{{ plugins 
@@ -273,6 +279,8 @@ nnoremap <silent> <c-space> :CtrlPMRU<cr>
 
 " Sessions
 let g:session_autosave = 'no'
+let g:session_autoload = 'no'
+
 
 " vim-sinpmate
 let g:snipMate = {}
@@ -281,5 +289,5 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails,ruby-1.9'
 " }}}
 
 
-let vim_dir_name=".vim"
-:exe "so ~/".vim_dir_name."/vimrc/search_replace.vim"
+let $VIM_DIR_NAME="~/vimfiles"
+so $VIM_DIR_NAME/vimrc/search_replace.vim

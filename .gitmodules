@@ -16,9 +16,6 @@
 [submodule "bundle/PHP-Indenting-for-VIm"]
 	path = bundle/PHP-Indenting-for-VIm
 	url = https://github.com/2072/PHP-Indenting-for-VIm
-[submodule "bundle/vim-snipmate"]
-	path = bundle/vim-snipmate
-	url = https://github.com/garbas/vim-snipmate.git
 [submodule "bundle/bufexplorer"]
 	path = bundle/bufexplorer
 	url = https://github.com/vim-scripts/bufexplorer.zip
@@ -28,9 +25,6 @@
 [submodule "bundle/vim-addon-mw-utils"]
 	path = bundle/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils
-[submodule "bundle/snipmate-snippets"]
-	path = bundle/snipmate-snippets
-	url = https://github.com/honza/snipmate-snippets
 [submodule "bundle/vim-session"]
 	path = bundle/vim-session
 	url = git://github.com/xolox/vim-session.git
@@ -39,4 +33,8 @@
 	url = https://github.com/kien/ctrlp.vim
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
-	url = git://github.com/SirVer/ultisnips.git
+	url = https://github.com/vim-scripts/UltiSnips
+[submodule "bundle/vim-ruby"]
+	path = bundle/vim-ruby
+        url = https://github.com/vim-ruby/vim-ruby.git
+
