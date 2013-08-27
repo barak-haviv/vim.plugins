@@ -69,10 +69,11 @@ if has('gui_running')
 endif
 " }}}
 " {{{ behavior
-set nocompatible
-syntax on
-filetype on
-filetype plugin on
+set nocompatible      " We're running Vim, not Vi!
+syntax on             " Enable syntax highlighting
+filetype on           " Enable filetype detection
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
 
 " fast terminal for smoother redrawing
 set ttyfast
@@ -153,6 +154,7 @@ set switchbuf=useopen
 " change font size 
 nnoremap <C-kPlus> :silent! let &guifont = substitute( &guifont, ':h\zs\d\+', '\=eval(submatch(0)+1)', '')<CR>
 nnoremap <C-kMinus> :silent! let &guifont = substitute( &guifont, ':h\zs\d\+', '\=eval(submatch(0)-1)', '')<CR>
+
 " }}}
 " {{{ filetypes 
 augroup myfiletypes
@@ -257,14 +259,19 @@ map <leader>y "+y
 map <leader>p "+p
 
 
+" save file
+map <c-s> :w<cr>
+imap <c-s> <esc>:w<cr>
+
 
 " }}}
 " {{{ plugins 
 
 " NERDTree
 nnoremap <leader>n :NERDTreeToggle<cr>
-let NERDTreeWinSize = 21
+let NERDTreeWinSize = 41
 let NERDTreeShowHidden = 1
+let NERDTreeIgnore=['\.\.$', '\.$', '\~$']
 
 " BufExplorer
 nnoremap <silent> <leader>B :BufExplorer<cr>
@@ -288,6 +295,29 @@ let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails,ruby-1.9'
 " }}}
 
+"{{{ vim tips
+"replace word with register b WITH SPACE AFTER word
+noremap go lb"bPldwi <Esc>hbye
+
+"replace word with reg b WITHOUT SPACE after word
+"(lb so no move to previous word, but gives error at end of line)
+noremap gp lb"bPldwhbyw
+
+"copy this word to register b for replacing with go and gp
+noremap gy lb"bye
+
+
+function! TabMessage(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  tabnew
+  silent put=message
+  set nomodified
+endfunction
+command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
+
+" }}}
 
 let $VIM_DIR_NAME="~/vimfiles"
 so $VIM_DIR_NAME/vimrc/search_replace.vim
