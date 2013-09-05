@@ -247,7 +247,8 @@ let mapleader = ";"
 map <c-a> ggVG
 
 " vimrc
-let $VIMRC_FILE='~/vimfiles/vimrc/vimrc_barak'
+let $VIM_DIR_NAME="~/.vim"
+let $VIMRC_FILE=$VIM_DIR_NAME.'/vimrc/vimrc_barak'
 map <leader>v :e $VIMRC_FILE<CR>
 map <leader>s :so $VIMRC_FILE<CR>
 
@@ -319,5 +320,4 @@ command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 
 " }}}
 
-let $VIM_DIR_NAME="~/vimfiles"
 so $VIM_DIR_NAME/vimrc/search_replace.vim
